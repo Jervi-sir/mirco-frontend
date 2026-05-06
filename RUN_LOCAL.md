@@ -21,11 +21,12 @@ From the repo root:
 pnpm dev:all
 ```
 
-This starts all 7 apps together:
+This starts all 8 apps together:
 
 - `shell-next`
 - `shop-next-zone`
 - `dashboard-next-zone`
+- `auth-next`
 - `mf-host-react`
 - `mf-products-react`
 - `mf-cart-vue`
@@ -59,6 +60,7 @@ This repo contains 2 separate micro-frontend approaches:
 - `shell-next`: `3000`
 - `shop-next-zone`: `3001`
 - `dashboard-next-zone`: `3002`
+- `auth-next`: `3003`
 
 ## Run Module Federation locally
 
@@ -115,7 +117,7 @@ To simulate remote failures:
 
 If you do not want to use `pnpm dev:all`, run only the Next.js zone apps manually.
 
-Open 3 terminals from the repo root.
+Open 4 terminals from the repo root.
 
 Terminal 1:
 
@@ -135,6 +137,12 @@ Terminal 3:
 pnpm dev:dashboard
 ```
 
+Terminal 4:
+
+```bash
+pnpm dev:auth
+```
+
 Open:
 
 ```txt
@@ -150,6 +158,10 @@ http://localhost:3000
 - `/shop/products` and `/shop/drops` work
 - `/dashboard` is rewritten to `dashboard-next-zone`
 - `/dashboard/orders` and `/dashboard/settings` work
+- `/login` is rewritten to `auth-next`
+- `/register` is rewritten to `auth-next`
+- `/me` is rewritten to `auth-next`
+- `/logout` is rewritten to `auth-next`
 
 ## Build everything
 
@@ -177,3 +189,4 @@ It can be used later to proxy the Next zones behind one local entrypoint.
 - `http://localhost:3000` loads the Next shell
 - `/shop/*` routes resolve through the shell
 - `/dashboard/*` routes resolve through the shell
+- `/login`, `/register`, `/me`, and `/logout` resolve through the shell

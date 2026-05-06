@@ -5,7 +5,7 @@ export default function PricingPage() {
     <ZoneShell
       eyebrow="Shell Zone"
       title="Pricing surface owned by the shell"
-      description="A route that remains local to the shell even while `/shop` and `/dashboard` are deployed independently."
+      description="A route that remains local to the shell even while `/shop`, `/dashboard`, and auth pages are deployed independently."
     >
       <div className="grid gap-4 md:grid-cols-3">
         {['Starter', 'Scale', 'Enterprise'].map((tier) => (

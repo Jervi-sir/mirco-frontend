@@ -11,6 +11,7 @@ export default function AboutPage() {
         <li>Shell owns: `/`, `/about`, `/pricing`</li>
         <li>Shop zone owns: `/shop`, `/shop/products`, `/shop/drops`</li>
         <li>Dashboard zone owns: `/dashboard`, `/dashboard/orders`, `/dashboard/settings`</li>
+        <li>Auth zone owns: `/login`, `/register`, `/me`, `/logout`</li>
       </ul>
     </ZoneShell>
   )
