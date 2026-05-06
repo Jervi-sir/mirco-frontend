@@ -1,0 +1,71 @@
+:root {
+  color: #e2e8f0;
+  background: #020617;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0f172a, #020617);
+}
+
+.remote-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.section-label,
+.body-copy,
+.metric-card span,
+.orders-list span {
+  color: #94a3b8;
+}
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: #c4b5fd;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.metric-card,
+.orders-list li {
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.78);
+  padding: 18px;
+}
+
+.metric-card {
+  display: grid;
+  gap: 8px;
+}
+
+.metric-card strong {
+  font-size: 1.8rem;
+}
+
+.metric-card em {
+  color: #a7f3d0;
+  font-style: normal;
+}
+
+.orders-list {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.orders-list li {
+  display: grid;
+  gap: 6px;
+}

@@ -1,0 +1,10 @@
+{
+  "latestErrorEvent": {
+    "code": "TYPE-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project /Users/bekheiragacemlamine/Desktop/micro-frontend/apps/mf-cart-vue/node_modules/.federation/tsconfig.ffe3d7ed4f86694dab9c0ffefdc3343a.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "args": {
+      "cmd": "npx tsc --project /Users/bekheiragacemlamine/Desktop/micro-frontend/apps/mf-cart-vue/node_modules/.federation/tsconfig.ffe3d7ed4f86694dab9c0ffefdc3343a.json"
+    },
+    "timestamp": 1778106402931
+  }
+}

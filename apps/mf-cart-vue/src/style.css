@@ -1,0 +1,67 @@
+:root {
+  color: #e2e8f0;
+  background: #020617;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f172a, #020617);
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.remote-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  display: grid;
+  gap: 18px;
+}
+
+.cart-shell,
+.summary-card {
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.78);
+  padding: 18px;
+}
+
+.section-label,
+.body-copy,
+.cart-list span,
+.cart-footer span,
+.summary-card span {
+  color: #94a3b8;
+}
+
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: #fda4af;
+}
+
+.cart-list {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-list li,
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cart-footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+}

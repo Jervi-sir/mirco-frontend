@@ -1,0 +1,20 @@
+{
+  "name": "dropjdid-mfe-lab",
+  "private": true,
+  "packageManager": "pnpm@10.20.0",
+  "scripts": {
+    "dev:all": "concurrently -n shell,shop,dashboard,mf-host,mf-products,mf-cart,mf-admin -c blue,cyan,magenta,green,yellow,red,white \"pnpm dev:shell\" \"pnpm dev:shop\" \"pnpm dev:dashboard\" \"pnpm dev:mf-host\" \"pnpm dev:mf-products\" \"pnpm dev:mf-cart\" \"pnpm dev:mf-admin\"",
+    "dev:mf-host": "pnpm --filter mf-host-react dev",
+    "dev:mf-products": "pnpm --filter mf-products-react dev",
+    "dev:mf-cart": "pnpm --filter mf-cart-vue dev",
+    "dev:mf-admin": "pnpm --filter mf-admin-react dev",
+    "dev:shell": "pnpm --filter shell-next dev",
+    "dev:shop": "pnpm --filter shop-next-zone dev",
+    "dev:dashboard": "pnpm --filter dashboard-next-zone dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
