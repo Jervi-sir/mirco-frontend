@@ -11,6 +11,7 @@ export default function LatestOrders() {
 
   return (
     <ul className="orders-list">
+      <p>react lastestOrders</p>
       {orders.map((order) => (
         <li key={order.id}>
           <strong>{order.id}</strong>

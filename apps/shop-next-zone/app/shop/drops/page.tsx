@@ -8,7 +8,7 @@ export default async function ShopDropsPage() {
     <ZoneFrame
       eyebrow="Shop Zone"
       title="Drops route owned by the shop app"
-      description="Upcoming launches remain isolated to the shop deployment."
+      description="isolated only to shop zone."
     >
       <div className="grid gap-4 md:grid-cols-2">
         {drops.map((drop) => (

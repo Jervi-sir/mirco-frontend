@@ -7,8 +7,8 @@ export default async function DashboardHomePage() {
   return (
     <ZoneFrame
       eyebrow="Dashboard Zone"
-      title="Operational routes isolated under /dashboard"
-      description="This app owns staff workflows and can be deployed independently from the storefront."
+      title="Dashboard zone"
+      description="only dashboard features will be here."
     >
       <div className="grid gap-4 md:grid-cols-2">
         <article className="rounded-3xl border border-white/10 bg-white/5 p-5">

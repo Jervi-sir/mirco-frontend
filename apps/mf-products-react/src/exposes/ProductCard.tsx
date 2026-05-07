@@ -3,6 +3,7 @@ import type { Product } from '@dropjdid/types'
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <article className="product-card">
+      <p>react productCard</p>
       <div className="product-card-top">
         <span className={`product-status status-${product.status}`}>{product.status}</span>
         <span>{product.inventory} left</span>

@@ -8,7 +8,7 @@ export default async function ShopHomePage() {
     <ZoneFrame
       eyebrow="Shop Zone"
       title="Independent commerce routes under /shop"
-      description="This zone owns the buying journey while the shell continues to own marketing pages."
+      description="This zone focus only on shop zone."
     >
       <div className="grid gap-4 md:grid-cols-2">
         <article className="rounded-3xl border border-white/10 bg-white/5 p-5">

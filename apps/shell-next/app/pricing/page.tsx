@@ -1,4 +1,4 @@
-import { ZoneShell } from '../../components/zone-shell'
+import { ZoneShell } from '@dropjdid/ui'
 
 export default function PricingPage() {
   return (
@@ -6,6 +6,7 @@ export default function PricingPage() {
       eyebrow="Shell Zone"
       title="Pricing surface owned by the shell"
       description="A route that remains local to the shell even while `/shop`, `/dashboard`, and auth pages are deployed independently."
+      pathname={'/pricing'}
     >
       <div className="grid gap-4 md:grid-cols-3">
         {['Starter', 'Scale', 'Enterprise'].map((tier) => (

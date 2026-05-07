@@ -22,6 +22,7 @@ export default function ProductList({ failMode = false }: { failMode?: boolean }
   return (
     <div className="products-remote">
       <ProductFilters />
+      <p>react productList</p>
       <div className="products-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />

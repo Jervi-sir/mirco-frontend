@@ -12,6 +12,7 @@ export function Layout() {
     <div className="shell">
       <header className="hero-panel">
         <div>
+          <p>React host</p>
           <p className="eyebrow">DropJdid Micro-Frontend Lab</p>
           <h1>React host orchestrating React and Vue remotes at runtime</h1>
           <p className="hero-copy">

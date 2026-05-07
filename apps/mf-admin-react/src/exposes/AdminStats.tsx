@@ -11,6 +11,7 @@ export default function AdminStats() {
 
   return (
     <div className="metric-grid">
+      <p>react adminStats</p>
       {metrics.map((metric) => (
         <article key={metric.label} className="metric-card">
           <span>{metric.label}</span>

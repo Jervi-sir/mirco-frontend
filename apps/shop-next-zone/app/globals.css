@@ -23,3 +23,23 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
+
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.filters-row p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+.filter-chip {
+  border-radius: 9999px;
+  border: 1px solid rgba(103, 232, 249, 0.24);
+  background: rgba(8, 47, 73, 0.45);
+  padding: 0.5rem 0.75rem;
+  color: #cffafe;
+}
