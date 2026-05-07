@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   assetPrefix:
     process.env.NODE_ENV === "development"
       ? "http://localhost:13003"
-      : undefined,
+      : "https://mfe.auth.jervi.dev",
   transpilePackages: ["@dropjdid/ui", "@micro-frontend/shadcn-ui"],
 };
 

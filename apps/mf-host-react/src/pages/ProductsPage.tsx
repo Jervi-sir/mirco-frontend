@@ -10,7 +10,7 @@ export function ProductsPage() {
   const [failMode, setFailMode] = useState(false)
 
   useEffect(() => {
-    getRemoteHealth('http://localhost:4101/health.json').then(setHealth)
+    getRemoteHealth('https://mfe.react.products.jervi.dev/health.json').then(setHealth)
   }, [retryKey])
 
   const healthLabel = useMemo(() => health.toUpperCase(), [health])

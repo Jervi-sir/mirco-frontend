@@ -7,7 +7,7 @@ export function CartPage() {
   const [health, setHealth] = useState('checking')
 
   useEffect(() => {
-    getRemoteHealth('http://localhost:4102/health.json').then(setHealth)
+    getRemoteHealth('https://mfe.react.cart.jervi.dev/health.json').then(setHealth)
   }, [retryKey])
 
   return (

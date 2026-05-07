@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   assetPrefix:
     process.env.NODE_ENV === "development"
       ? "http://localhost:13002"
-      : undefined,
+      : "https://mfe.dashboard.jervi.dev",
   transpilePackages: ["@dropjdid/api-client"],
 };
 

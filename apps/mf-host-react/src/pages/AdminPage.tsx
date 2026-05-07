@@ -9,7 +9,7 @@ export function AdminPage() {
   const [health, setHealth] = useState('checking')
 
   useEffect(() => {
-    getRemoteHealth('http://localhost:4103/health.json').then(setHealth)
+    getRemoteHealth('https://mfe.react.admin.jervi.dev/health.json').then(setHealth)
   }, [retryKey])
 
   return (

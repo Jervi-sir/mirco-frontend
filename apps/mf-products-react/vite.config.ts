@@ -20,4 +20,10 @@ export default defineConfig({
   build: {
     target: 'esnext',
   },
+  preview: {
+    port: 14101,
+    strictPort: true,
+    host: '0.0.0.0',
+    allowedHosts: ['mfe.react.products.jervi.dev'],
+  },
 })

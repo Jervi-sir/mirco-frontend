@@ -2,6 +2,8 @@ import { defineConfig } from 'vite'
 import { federation } from '@module-federation/vite'
 import react from '@vitejs/plugin-react'
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   plugins: [
     react(),
@@ -12,19 +14,19 @@ export default defineConfig({
         products: {
           type: 'module',
           name: 'products',
-          entry: 'http://localhost:4101/remoteEntry.js',
+          entry: isProd ? 'https://mfe.react.products.jervi.dev/remoteEntry.js' : 'http://localhost:14101/remoteEntry.js',
           shareScope: 'default',
         },
         cart: {
           type: 'module',
           name: 'cart',
-          entry: 'http://localhost:4102/remoteEntry.js',
+          entry: isProd ? 'https://mfe.react.cart.jervi.dev/remoteEntry.js' : 'http://localhost:14102/remoteEntry.js',
           shareScope: 'default',
         },
         admin: {
           type: 'module',
           name: 'admin',
-          entry: 'http://localhost:4103/remoteEntry.js',
+          entry: isProd ? 'https://mfe.react.admin.jervi.dev/remoteEntry.js' : 'http://localhost:14103/remoteEntry.js',
           shareScope: 'default',
         },
       },
@@ -33,5 +35,11 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
+  },
+  preview: {
+    port: 14100,
+    strictPort: true,
+    host: '0.0.0.0',
+    allowedHosts: ['mfe.react.jervi.dev'],
   },
 })
