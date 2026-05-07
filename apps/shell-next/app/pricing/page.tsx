@@ -1,12 +1,15 @@
 import { ZoneShell } from '@dropjdid/ui'
+import { getAuthEmail } from '../../lib/auth'
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const email = await getAuthEmail()
   return (
     <ZoneShell
       eyebrow="Shell Zone"
       title="Pricing surface owned by the shell"
       description="A route that remains local to the shell even while `/shop`, `/dashboard`, and auth pages are deployed independently."
       pathname={'/pricing'}
+      email={email}
     >
       <div className="grid gap-4 md:grid-cols-3">
         {['Starter', 'Scale', 'Enterprise'].map((tier) => (
