@@ -2,6 +2,7 @@ import { LabButton, StatusPill, Surface } from '@dropjdid/ui'
 import { Button, Badge } from '@micro-frontend/shadcn-ui'
 import { AuthFrame } from '../../components/auth-frame'
 import { getAuthEmail } from '../../lib/auth'
+import { ClientUse } from './client-use'
 
 export default async function UiLabPage() {
   const email = await getAuthEmail()
@@ -13,7 +14,7 @@ export default async function UiLabPage() {
       description="This route demonstrates how auth-next can consume shared components from packages/ui through the @dropjdid/ui workspace package."
     >
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(18rem,0.9fr)]">
-        <Button>dfsfwed</Button>
+        <ClientUse />
         <Surface title="Auth journey" aside={<StatusPill>{email ? 'Authenticated session' : 'Anonymous session'}</StatusPill>}>
           <div className="grid gap-4 text-sm text-slate-300">
             <p>

@@ -19,7 +19,9 @@ body {
 }
 
 body {
-  background: radial-gradient(circle at top, rgba(244, 114, 182, 0.12), transparent 28%), linear-gradient(180deg, #111827, #020617);
+  background:
+    radial-gradient(circle at top, rgba(244, 114, 182, 0.12), transparent 28%),
+    linear-gradient(180deg, #111827, #020617);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
