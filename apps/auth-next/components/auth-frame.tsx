@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { getAuthEmail } from '../lib/auth'
 
@@ -21,11 +22,12 @@ export async function AuthFrame({ eyebrow, title, description, children }: AuthF
           {email ? `Signed in as ${email}` : 'Not signed in'}
         </div>
         <nav className="mt-6 flex flex-wrap gap-3 text-sm">
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/">Shell</a>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/login">Login</a>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/register">Register</a>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/me">Me</a>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/logout">Logout</a>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/">Shell</Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/login">Login</Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/register">Register</Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/me">Me</Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/ui-lab">UI Lab</Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2" href="/logout">Logout</Link>
         </nav>
       </header>
       {children}

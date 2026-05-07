@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# `shell-next`
 
-## Getting Started
+Primary Next.js shell for the multi-zone lab.
 
-First, run the development server:
+## Runs On
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Dev server: `http://localhost:3000`
+- Script: `pnpm --filter shell-next dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## What This App Exposes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Owns the shell routes directly:
+  - `/`
+  - `/about`
+  - `/pricing`
+- Acts as the public entrypoint for the zone-based Next apps through rewrites in `next.config.ts`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How Other Apps Are Called
 
-## Learn More
+- Rewrites `/shop/:path*` to `http://localhost:3001/shop/:path*`
+- Rewrites `/dashboard/:path*` to `http://localhost:3002/dashboard/:path*`
+- Rewrites `/login` to `http://localhost:3003/login`
+- Rewrites `/register` to `http://localhost:3003/register`
+- Rewrites `/me` to `http://localhost:3003/me`
+- Rewrites `/logout` to `http://localhost:3003/logout`
 
-To learn more about Next.js, take a look at the following resources:
+## How This App Is Called
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Browser users should normally enter the lab through this app.
+- The zone apps are intended to be reached through this shell's public URLs, even though they also run on their own ports in development.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Integration Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This app does not use Module Federation.
+- Its main integration responsibility is route ownership and proxying requests to the correct Next.js zone.

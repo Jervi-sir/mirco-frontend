@@ -1,34 +1,38 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/shop/:path*',
-        destination: 'http://localhost:3001/shop/:path*',
+        source: "/shop/:path*",
+        destination: "http://localhost:3001/shop/:path*",
       },
       {
-        source: '/dashboard/:path*',
-        destination: 'http://localhost:3002/dashboard/:path*',
+        source: "/dashboard/:path*",
+        destination: "http://localhost:3002/dashboard/:path*",
       },
       {
-        source: '/login',
-        destination: 'http://localhost:3003/login',
+        source: "/login",
+        destination: "http://localhost:3003/login",
       },
       {
-        source: '/register',
-        destination: 'http://localhost:3003/register',
+        source: "/register",
+        destination: "http://localhost:3003/register",
       },
       {
-        source: '/me',
-        destination: 'http://localhost:3003/me',
+        source: "/me",
+        destination: "http://localhost:3003/me",
       },
       {
-        source: '/logout',
-        destination: 'http://localhost:3003/logout',
+        source: "/logout",
+        destination: "http://localhost:3003/logout",
       },
-    ]
+      {
+        source: "/ui-lab",
+        destination: "http://localhost:3003/ui-lab",
+      },
+    ];
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

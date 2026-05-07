@@ -1,14 +1,5 @@
 # Run Locally
 
-## Requirements
-
-- Node.js 20+
-- `pnpm`
-
-## Install
-
-From the repo root:
-
 ```bash
 pnpm install
 ```
@@ -21,7 +12,7 @@ From the repo root:
 pnpm dev:all
 ```
 
-This starts all 8 apps together:
+This starts all apps together:
 
 - `shell-next`
 - `shop-next-zone`
@@ -63,8 +54,6 @@ This repo contains 2 separate micro-frontend approaches:
 - `auth-next`: `3003`
 
 ## Run Module Federation locally
-
-If you do not want to use `pnpm dev:all`, run only the Module Federation apps manually.
 
 Open 4 terminals from the repo root.
 

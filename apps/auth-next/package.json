@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@dropjdid/ui": "workspace:*",
+    "@micro-frontend/shadcn-ui": "workspace:*",
     "next": "16.2.5",
     "react": "19.2.4",
     "react-dom": "19.2.4"

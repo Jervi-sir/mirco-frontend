@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { AuthFrame } from '../../components/auth-frame'
 import { logoutAction } from '../actions'
 
@@ -17,12 +18,12 @@ export default async function LogoutPage() {
           <button className="rounded-full bg-pink-400 px-4 py-2 text-sm font-semibold text-slate-950" type="submit">
             Logout now
           </button>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm" href="/login">
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm" href="/login">
             Login again
-          </a>
-          <a className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm" href="/">
+          </Link>
+          <Link className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm" href="/">
             Back to shell
-          </a>
+          </Link>
         </form>
       </section>
     </AuthFrame>

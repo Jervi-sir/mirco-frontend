@@ -1,73 +1,35 @@
-# React + TypeScript + Vite
+# `mf-host-react`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React host application for the Module Federation part of the lab.
 
-Currently, two official plugins are available:
+## Runs On
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dev server: `http://localhost:4100`
+- Script: `pnpm --filter mf-host-react dev`
 
-## React Compiler
+## What This App Exposes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- This app does not expose remote modules to other apps.
+- It exposes browser routes inside its own SPA:
+  - `/`
+  - `/products`
+  - `/cart`
+  - `/admin`
 
-## Expanding the ESLint configuration
+## How Other Apps Are Called
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Loads the `products` remote from `http://localhost:4101/remoteEntry.js`
+- Loads the `cart` remote from `http://localhost:4102/remoteEntry.js`
+- Loads the `admin` remote from `http://localhost:4103/remoteEntry.js`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Runtime Imports
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `products/ProductList` is loaded with `React.lazy()` on the products page.
+- `admin/AdminStats` is loaded with `React.lazy()` on the admin page.
+- `cart/CartWidget` is loaded dynamically and mounted into a React slot on the cart page.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Integration Notes
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- This host demonstrates cross-framework composition by mounting a Vue remote inside a React app.
+- It performs remote health checks against each remote's `health.json` and wraps remote rendering with retry and error-boundary handling.
+- It also consumes the shared workspace package `@dropjdid/ui` locally.

@@ -1,73 +1,31 @@
-# React + TypeScript + Vite
+# `mf-admin-react`
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React remote for admin and operations widgets.
 
-Currently, two official plugins are available:
+## Runs On
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dev server: `http://localhost:4103`
+- Script: `pnpm --filter mf-admin-react dev`
 
-## React Compiler
+## What This App Exposes
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Module Federation remote entry: `http://localhost:4103/remoteEntry.js`
+- Exposed modules:
+  - `admin/AdminStats`
+  - `admin/LatestOrders`
 
-## Expanding the ESLint configuration
+## How This App Is Called
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `mf-host-react` registers this app as the `admin` remote and currently imports `admin/AdminStats` on the host's `/admin` route.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## How Other Apps Are Called
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Calls shared workspace packages:
+  - `@dropjdid/api-client`
+  - `@dropjdid/types`
+  - `@dropjdid/ui`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Integration Notes
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- This app is consumed only through Module Federation, not shell route rewrites.
+- Shared React dependencies are declared in federation config so the host and remote can cooperate at runtime.
