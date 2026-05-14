@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --port 14101 --strictPort",
     "build": "tsc -b && vite build",
+    "build:modal": "esbuild src/remote-modal-entry.tsx --bundle --outfile=public/remote-modal.js --format=esm --loader:.tsx=tsx --loader:.ts=ts --define:process.env.NODE_ENV=\\\"'development'\\\" --jsx=automatic",
     "lint": "eslint .",
     "preview": "vite preview"
   },

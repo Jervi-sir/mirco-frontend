@@ -1,4 +1,4 @@
-import { createElement, type CSSProperties } from 'react'
+import { createElement, Fragment, type CSSProperties } from 'react'
 
 type ModalFormFragmentProps = {
   buttonText: string
@@ -37,24 +37,28 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    background: 'rgba(0, 0, 0, 0.7)',
-    backdropFilter: 'blur(8px)',
-    display: 'none', // Controlled by checkbox
+    background: 'rgba(15, 23, 42, 0.8)',
+    backdropFilter: 'blur(12px)',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1000,
+    zIndex: 9999,
     opacity: 0,
-    transition: 'opacity 0.3s ease',
+    visibility: 'hidden',
+    pointerEvents: 'none',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
   },
   modalContent: {
-    width: '100%',
+    width: '90%',
     maxWidth: '480px',
-    background: '#1e293b',
+    background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
     borderRadius: '24px',
     padding: '40px',
     position: 'relative',
     border: '1px solid rgba(255, 255, 255, 0.1)',
     boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
+    transform: 'scale(0.95) translateY(20px)',
+    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
   },
   closeBtn: {
     position: 'absolute',
@@ -127,42 +131,81 @@ export function ModalFormFragment({
   const modalId = `modal-${Math.random().toString(36).substring(2, 9)}`
 
   return createElement(
-    'div',
-    { style: styles.container },
+    Fragment,
+    null,
     createElement(
-      'div',
-      { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
-      createElement('span', { style: styles.badge }, 'Interactive Fragment'),
-      createElement('span', { style: { ...styles.badge, background: 'rgba(255,255,255,0.05)', color: '#94a3b8', borderColor: 'rgba(255,255,255,0.1)' } }, source)
-    ),
-    createElement('style', null, `
+      'style',
+      null,
+      `
       #${modalId}-toggle { display: none; }
       #${modalId}-toggle:checked ~ .modal-overlay { 
-        display: flex !important; 
         opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
+      #${modalId}-toggle:checked ~ .modal-overlay .modal-content-container { 
+        transform: scale(1) translateY(0) !important;
       }
       .modal-trigger:hover { transform: translateY(-2px); filter: brightness(1.1); }
       .modal-input:focus { border-color: #6366f1 !important; box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2); }
-    `),
-    createElement('input', { type: 'checkbox', id: `${modalId}-toggle` }),
+    `,
+    ),
+    createElement('input', {
+      type: 'checkbox',
+      id: `${modalId}-toggle`,
+      style: { display: 'none' },
+    }),
     createElement(
-      'label',
-      { htmlFor: `${modalId}-toggle`, style: styles.trigger, className: 'modal-trigger' },
-      buttonText
+      'div',
+      { style: styles.container },
+      createElement(
+        'div',
+        { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
+        createElement('span', { style: styles.badge }, 'Interactive Fragment'),
+        createElement(
+          'span',
+          {
+            style: {
+              ...styles.badge,
+              background: 'rgba(255,255,255,0.05)',
+              color: '#94a3b8',
+              borderColor: 'rgba(255,255,255,0.1)',
+            },
+          },
+          source,
+        ),
+      ),
+      createElement(
+        'label',
+        {
+          htmlFor: `${modalId}-toggle`,
+          style: styles.trigger,
+          className: 'modal-trigger',
+        },
+        buttonText,
+      ),
     ),
     createElement(
       'div',
       { className: 'modal-overlay', style: styles.modalWrapper },
       createElement(
         'div',
-        { style: styles.modalContent },
+        { style: styles.modalContent, className: 'modal-content-container' },
         createElement(
           'label',
           { htmlFor: `${modalId}-toggle`, style: styles.closeBtn },
-          '×'
+          '×',
         ),
-        createElement('h2', { style: { fontSize: '24px', marginBottom: '8px', color: 'white' } }, title),
-        createElement('p', { style: { color: '#94a3b8', marginBottom: '32px', fontSize: '15px' } }, description),
+        createElement(
+          'h2',
+          { style: { fontSize: '24px', marginBottom: '8px', color: 'white' } },
+          title,
+        ),
+        createElement(
+          'p',
+          { style: { color: '#94a3b8', marginBottom: '32px', fontSize: '15px' } },
+          description,
+        ),
         createElement(
           'form',
           { style: styles.form, action: '#', method: 'POST' },
@@ -170,21 +213,30 @@ export function ModalFormFragment({
             'div',
             { style: styles.inputGroup },
             createElement('label', { style: styles.label }, 'Product Name'),
-            createElement('input', { className: 'modal-input', style: styles.input, placeholder: 'e.g. Premium Coffee Beans' })
+            createElement('input', {
+              className: 'modal-input',
+              style: styles.input,
+              placeholder: 'e.g. Premium Coffee Beans',
+            }),
           ),
           createElement(
             'div',
             { style: styles.inputGroup },
             createElement('label', { style: styles.label }, 'Price (USD)'),
-            createElement('input', { className: 'modal-input', style: styles.input, type: 'number', placeholder: '0.00' })
+            createElement('input', {
+              className: 'modal-input',
+              style: styles.input,
+              type: 'number',
+              placeholder: '0.00',
+            }),
           ),
           createElement(
             'button',
             { type: 'submit', style: styles.submitBtn },
-            'Add Product'
-          )
-        )
-      )
-    )
+            'Add Product',
+          ),
+        ),
+      ),
+    ),
   )
 }

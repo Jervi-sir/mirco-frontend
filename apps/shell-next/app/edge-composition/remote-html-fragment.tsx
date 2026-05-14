@@ -1,6 +1,6 @@
 'use client'
 
-import { createElement, useMemo, type ReactNode } from 'react'
+import { createElement, useMemo, useState, useEffect, type ReactNode } from 'react'
 
 function styleStringToObject(style: string) {
   return style.split(';').reduce<Record<string, string>>((acc, rule) => {
@@ -37,6 +37,11 @@ function domNodeToReact(node: Node, key: string): ReactNode {
       continue
     }
 
+    if (attribute.name === 'for') {
+      props.htmlFor = attribute.value
+      continue
+    }
+
     if (attribute.name === 'style') {
       props.style = styleStringToObject(attribute.value)
       continue
@@ -61,7 +66,25 @@ function htmlToReact(html: string) {
 }
 
 export function RemoteHtmlFragment({ html }: { html: string }) {
-  const content = useMemo(() => htmlToReact(html), [html])
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const content = useMemo(() => {
+    if (typeof window === 'undefined') return null
+    return htmlToReact(html)
+  }, [html])
+
+  if (!mounted) {
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: html }}
+        style={{ display: 'contents' }}
+      />
+    )
+  }
 
   return <>{content}</>
 }

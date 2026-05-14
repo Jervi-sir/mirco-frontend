@@ -1,5 +1,6 @@
 import { RoutePillLink, Surface } from '@dropjdid/ui'
 import { RemoteHtmlFragment } from './remote-html-fragment'
+import { WebComponentExperiment } from './web-component-experiment'
 
 export const runtime = 'edge'
 
@@ -55,12 +56,7 @@ export default async function EdgeCompositionPage() {
         </p>
       </Surface>
 
-      <RemoteHtmlFragment html={modalFragmentHtml} />
-      <Surface title="url called from" >
-        <p className="mt-2 text-sm leading-7 text-slate-300">
-          Modal Fragment URL: <code>{modalFragmentUrl}</code>
-        </p>
-      </Surface>
+      <WebComponentExperiment />
 
     </main>
   )
