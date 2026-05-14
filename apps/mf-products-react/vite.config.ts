@@ -1,10 +1,62 @@
 import { defineConfig } from 'vite'
 import { federation } from '@module-federation/vite'
 import react from '@vitejs/plugin-react'
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { HeaderFragment } from './src/fragments/HeaderFragment'
+
+function renderHeaderFragment(url: string) {
+  const requestUrl = new URL(url, 'http://localhost:14101')
+  const title = requestUrl.searchParams.get('title') ?? 'React header fragment'
+  const subtitle =
+    requestUrl.searchParams.get('subtitle') ??
+    'Rendered in the React app, fetched over HTTP, and inserted by a Next.js edge route.'
+  const source = requestUrl.searchParams.get('source') ?? 'mf-products-react'
+
+  return [
+    '<!doctype html>',
+    renderToStaticMarkup(
+      createElement(HeaderFragment, { title, subtitle, source }),
+    ),
+  ].join('')
+}
+
+function headerFragmentPlugin() {
+  const handleRequest = (requestUrl: string, response: { setHeader: (name: string, value: string) => void; end: (body: string) => void }) => {
+    response.setHeader('Content-Type', 'text/html; charset=utf-8')
+    response.setHeader('Cache-Control', 'no-store')
+    response.end(renderHeaderFragment(requestUrl))
+  }
+
+  return {
+    name: 'header-fragment-endpoint',
+    configureServer(server: { middlewares: { use: (handler: (req: { url?: string }, res: { setHeader: (name: string, value: string) => void; end: (body: string) => void }, next: () => void) => void) => void } }) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.startsWith('/fragments/header')) {
+          handleRequest(req.url, res)
+          return
+        }
+
+        next()
+      })
+    },
+    configurePreviewServer(server: { middlewares: { use: (handler: (req: { url?: string }, res: { setHeader: (name: string, value: string) => void; end: (body: string) => void }, next: () => void) => void) => void } }) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.startsWith('/fragments/header')) {
+          handleRequest(req.url, res)
+          return
+        }
+
+        next()
+      })
+    },
+  }
+}
 
 export default defineConfig({
   plugins: [
     react(),
+    headerFragmentPlugin(),
     federation({
       name: 'products',
       dts: false,
