@@ -18,17 +18,25 @@ function getRemoteHeaderUrls() {
   createElementFragmentUrl.searchParams.set('subtitle', 'This markup is rendered with createElement in the React app, fetched by a Next.js edge route, then converted into React nodes in the shell.')
   createElementFragmentUrl.searchParams.set('source', 'mf-products-react /fragments/header-react')
 
+  const modalFragmentUrl = new URL('/fragments/modal-form', baseUrl)
+  modalFragmentUrl.searchParams.set('buttonText', 'Open Product Form')
+  modalFragmentUrl.searchParams.set('title', 'Add New Product')
+  modalFragmentUrl.searchParams.set('description', 'This modal is served as a remote HTML fragment from the products MFE.')
+  modalFragmentUrl.searchParams.set('source', 'mf-products-react /fragments/modal-form')
+
   return {
     domFragmentUrl: domFragmentUrl.toString(),
     createElementFragmentUrl: createElementFragmentUrl.toString(),
+    modalFragmentUrl: modalFragmentUrl.toString(),
   }
 }
 
 export default async function EdgeCompositionPage() {
-  const { domFragmentUrl, createElementFragmentUrl } = getRemoteHeaderUrls()
-  const [domFragmentHtml, createElementFragmentHtml] = await Promise.all([
+  const { domFragmentUrl, createElementFragmentUrl, modalFragmentUrl } = getRemoteHeaderUrls()
+  const [domFragmentHtml, createElementFragmentHtml, modalFragmentHtml] = await Promise.all([
     fetch(domFragmentUrl, { cache: 'no-store' }).then((res) => res.text()),
     fetch(createElementFragmentUrl, { cache: 'no-store' }).then((res) => res.text()),
+    fetch(modalFragmentUrl, { cache: 'no-store' }).then((res) => res.text()),
   ])
 
   return (
@@ -47,6 +55,12 @@ export default async function EdgeCompositionPage() {
         </p>
       </Surface>
 
+      <RemoteHtmlFragment html={modalFragmentHtml} />
+      <Surface title="url called from" >
+        <p className="mt-2 text-sm leading-7 text-slate-300">
+          Modal Fragment URL: <code>{modalFragmentUrl}</code>
+        </p>
+      </Surface>
 
     </main>
   )

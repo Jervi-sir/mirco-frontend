@@ -5,6 +5,7 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { HeaderFragment } from './src/fragments/HeaderFragment'
 import { HeaderFragmentReact } from './src/fragments/HeaderFragmentReact'
+import { ModalFormFragment } from './src/fragments/ModalFormFragment'
 
 function renderHeaderFragment(url: string) {
   const requestUrl = new URL(url, 'http://localhost:14101')
@@ -33,6 +34,21 @@ function renderHeaderReactFragment(url: string) {
   ].join('')
 }
 
+function renderModalFormFragment(url: string) {
+  const requestUrl = new URL(url, 'http://localhost:14101')
+  const buttonText = requestUrl.searchParams.get('buttonText') ?? 'Open Modal'
+  const title = requestUrl.searchParams.get('title') ?? 'Modal Form'
+  const description = requestUrl.searchParams.get('description') ?? 'Enter details below to continue.'
+  const source = requestUrl.searchParams.get('source') ?? 'mf-products-react'
+
+  return [
+    '<!doctype html>',
+    renderToStaticMarkup(
+      createElement(ModalFormFragment, { buttonText, title, description, source }),
+    ),
+  ].join('')
+}
+
 function headerFragmentPlugin() {
   const handleRequest = (requestUrl: string, response: { setHeader: (name: string, value: string) => void; end: (body: string) => void }) => {
     response.setHeader('Content-Type', 'text/html; charset=utf-8')
@@ -56,6 +72,13 @@ function headerFragmentPlugin() {
           return
         }
 
+        if (req.url?.startsWith('/fragments/modal-form')) {
+          res.setHeader('Content-Type', 'text/html; charset=utf-8')
+          res.setHeader('Cache-Control', 'no-store')
+          res.end(renderModalFormFragment(req.url))
+          return
+        }
+
         next()
       })
     },
@@ -70,6 +93,13 @@ function headerFragmentPlugin() {
           res.setHeader('Content-Type', 'text/html; charset=utf-8')
           res.setHeader('Cache-Control', 'no-store')
           res.end(renderHeaderReactFragment(req.url))
+          return
+        }
+
+        if (req.url?.startsWith('/fragments/modal-form')) {
+          res.setHeader('Content-Type', 'text/html; charset=utf-8')
+          res.setHeader('Cache-Control', 'no-store')
+          res.end(renderModalFormFragment(req.url))
           return
         }
 
