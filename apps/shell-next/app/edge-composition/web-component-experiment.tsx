@@ -43,8 +43,8 @@ export const WebComponentExperiment = () => {
 
   return (
     <>
-      <Script 
-        src={remoteScriptUrl} 
+      <Script
+        src={remoteScriptUrl}
         strategy="afterInteractive"
         onLoad={() => console.log('Remote Modal script loaded')}
       />
@@ -52,11 +52,11 @@ export const WebComponentExperiment = () => {
       <Surface title="Web Component Experiment" >
         <div className="flex flex-col gap-6 mt-4">
           <p className="text-sm leading-7 text-slate-300">
-            This experiment loads a <strong>Web Component</strong> from a remote MFE. 
-            The host communicates with it via <strong>attributes</strong> (props) and 
+            This experiment loads a <strong>Web Component</strong> from a remote MFE.
+            The host communicates with it via <strong>attributes</strong> (props) and
             listens for <strong>custom events</strong>.
           </p>
-          
+
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsOpen(true)}
@@ -64,7 +64,7 @@ export const WebComponentExperiment = () => {
             >
               Open Remote Web Component Modal
             </button>
-            
+
             <div className="flex items-center gap-2">
               <div className={`w-3 h-3 rounded-full ${isOpen ? 'bg-green-500 animate-pulse' : 'bg-slate-600'}`} />
               <span className="text-xs font-mono text-slate-400">
@@ -76,7 +76,7 @@ export const WebComponentExperiment = () => {
           <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-800">
             <p className="text-xs font-mono text-slate-500 mb-2 uppercase tracking-wider">Usage in code:</p>
             <pre className="text-[11px] text-indigo-300 overflow-x-auto">
-{`<remote-modal 
+              {`<remote-modal 
   title="Micro-Frontend Modal" 
   open="${isOpen}"
 ></remote-modal>`}
