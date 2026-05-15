@@ -4,9 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import { Surface } from '@dropjdid/ui';
 
-// Add type definition for the custom element to avoid TS errors
 declare global {
-  namespace JSX {
+  namespace React.JSX {
     interface IntrinsicElements {
       'remote-modal': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
         title?: string;
