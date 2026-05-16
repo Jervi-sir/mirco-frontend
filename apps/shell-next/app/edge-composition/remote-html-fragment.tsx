@@ -1,6 +1,6 @@
 'use client'
 
-import { createElement, useMemo, useState, useEffect, type ReactNode } from 'react'
+import { createElement, useMemo, useState, useEffect, useRef, type ReactNode } from 'react'
 
 function styleStringToObject(style: string) {
   return style.split(';').reduce<Record<string, string>>((acc, rule) => {
@@ -67,10 +67,25 @@ function htmlToReact(html: string) {
 
 export function RemoteHtmlFragment({ html }: { html: string }) {
   const [mounted, setMounted] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (mounted && containerRef.current) {
+      const scripts = containerRef.current.querySelectorAll('script')
+      scripts.forEach((oldScript) => {
+        const newScript = document.createElement('script')
+        Array.from(oldScript.attributes).forEach((attr) =>
+          newScript.setAttribute(attr.name, attr.value),
+        )
+        newScript.appendChild(document.createTextNode(oldScript.innerHTML))
+        oldScript.parentNode?.replaceChild(newScript, oldScript)
+      })
+    }
+  }, [mounted, html])
 
   const content = useMemo(() => {
     if (typeof window === 'undefined') return null
@@ -86,5 +101,5 @@ export function RemoteHtmlFragment({ html }: { html: string }) {
     )
   }
 
-  return <>{content}</>
+  return <div ref={containerRef} style={{ display: 'contents' }}>{content}</div>
 }
